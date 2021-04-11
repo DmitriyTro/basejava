@@ -2,26 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.Arrays;
-
 public class ArrayStorage extends AbstractArrayStorage implements Storage {
-    private static final int STORAGE_LIMIT = 10000;
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size;
-
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-    }
-
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index >= 0) {
-            storage[index] = resume;
-        } else {
-            System.out.println("Резюме с таким uuid: " + resume.getUuid() + " не найдено.");
-        }
-    }
 
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
@@ -37,14 +18,6 @@ public class ArrayStorage extends AbstractArrayStorage implements Storage {
         }
     }
 
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            return null;
-        }
-        return storage[index];
-    }
-
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if(index >= 0) {
@@ -55,10 +28,6 @@ public class ArrayStorage extends AbstractArrayStorage implements Storage {
         } else {
             System.out.println("Резюме с таким uuid не найден.");
         }
-    }
-
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
     }
 
     protected int getIndex(String uuid) {
