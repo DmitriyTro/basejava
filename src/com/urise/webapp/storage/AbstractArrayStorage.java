@@ -72,4 +72,3 @@ public abstract class AbstractArrayStorage implements Storage {
 		return size;
 	}
 }
-
