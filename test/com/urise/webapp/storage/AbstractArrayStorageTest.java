@@ -23,7 +23,7 @@ public abstract class AbstractArrayStorageTest {
 	public static final Resume RESUME_3 = new Resume(UUID_3);
 	public static final Resume RESUME_4 = new Resume(UUID_4);
 
-	public AbstractArrayStorageTest(Storage storage) {
+	protected AbstractArrayStorageTest(Storage storage) {
 		this.storage = storage;
 	}
 
@@ -85,7 +85,7 @@ public abstract class AbstractArrayStorageTest {
 	@Test(expected = StorageException.class)
 	public void saveOverflow() throws Exception {
 		try {
-			for (int i = 4; i <= storage.getAll().length; i++) {
+			for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
 				storage.save(new Resume());
 			}
 		} catch (StorageException e) {
