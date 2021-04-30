@@ -79,7 +79,6 @@ public abstract class AbstractArrayStorageTest {
 
 	@Test()
 	public void get() {
-		storage.get(RESUME_1.getUuid());
 		assertEquals(RESUME_1, storage.get(RESUME_1.getUuid()));
 	}
 
