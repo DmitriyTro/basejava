@@ -6,11 +6,11 @@ import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
-	protected abstract void doUpdate(Resume resume, Object key);
+	protected abstract void doUpdate(Resume resume, Object searchKey);
 
-	protected abstract void doSave(Resume resume, Object key);
+	protected abstract void doSave(Resume resume, Object searchKey);
 
-	protected abstract void doDelete(Object key);
+	protected abstract void doDelete(Object searchKey);
 
 	protected abstract Resume doGet(Object searchKey);
 
@@ -19,7 +19,7 @@ public abstract class AbstractStorage implements Storage {
 	protected abstract Object getSearchKey(String uuid);
 
 	public void update(Resume resume) {
-		Object searchKey = getNotExistedSearchKey(resume.getUuid());
+		Object searchKey = getExistedSearchKey(resume.getUuid());
 		doUpdate(resume, searchKey);
 	}
 
@@ -40,7 +40,7 @@ public abstract class AbstractStorage implements Storage {
 
 	private Object getExistedSearchKey(String uuid) {
 		Object searchKey = getSearchKey(uuid);
-		if (isExist(searchKey)) {
+		if (!isExist(searchKey)) {
 			throw new NotExistStorageException(uuid);
 		}
 		return searchKey;
