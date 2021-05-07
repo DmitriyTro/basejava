@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
@@ -102,10 +104,12 @@ public abstract class AbstractStorageTest {
 	@Test
 	public void getAll() {
 		Resume[] resume = storage.getAll();
+		Arrays.sort(resume);
 		assertEquals(3, resume.length);
 		assertEquals(RESUME_1, resume[0]);
 		assertEquals(RESUME_2, resume[1]);
 		assertEquals(RESUME_3, resume[2]);
+
 	}
 
 	@Test
