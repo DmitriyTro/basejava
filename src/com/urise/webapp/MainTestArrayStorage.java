@@ -7,11 +7,11 @@ public class MainTestArrayStorage {
     private static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
-        final Resume r1 = new Resume();
+        final Resume r1 = new Resume("fullName");
 //        r1.setUuid("uuid1");
-        final Resume r2 = new Resume();
+        final Resume r2 = new Resume("fullName");
 //        r2.setUuid("uuid2");
-        final Resume r3 = new Resume();
+        final Resume r3 = new Resume("fullName");
 //        r3.setUuid("uuid3");
 
         ARRAY_STORAGE.save(r1);

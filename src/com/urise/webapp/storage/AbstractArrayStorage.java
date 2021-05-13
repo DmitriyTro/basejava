@@ -43,19 +43,18 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
 	@Override
 	protected void doDelete(Object index) {
-		fillDeletedElement((Integer) index);
+		fillDeletedElement((Integer)index);
 		storage[size - 1] = null;
 		size--;
 	}
 
-	@Override
 	public Resume doGet(Object index) {
-		return storage[(Integer) index];
+		return storage[(Integer)index];
 	}
 
 	@Override
 	protected boolean isExist(Object index) {
-		return (Integer) index >= 0;
+		return (Integer)index >= 0;
 	}
 
 	protected abstract void insertElement(Resume resume, int index);
