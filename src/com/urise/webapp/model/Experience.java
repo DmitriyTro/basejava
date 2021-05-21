@@ -3,28 +3,28 @@ package com.urise.webapp.model;
 import java.time.LocalDate;
 
 public class Experience {
-	private final String pageOrganization;
-	private final LocalDate startedDate;
-	private final LocalDate endedDate;
 	private final String title;
 	private final String description;
+	private final LocalDate startedDate;
+	private final LocalDate endedDate;
+	private final String pageOrganization;
 
-	public Experience(String pageOrganization, LocalDate startedDate, LocalDate endedDate, String title, String description) {
-		this.pageOrganization = pageOrganization;
-		this.startedDate = startedDate;
-		this.endedDate = endedDate;
+	public Experience(String title, String description, LocalDate startedDate, LocalDate endedDate, String pageOrganization) {
 		this.title = title;
 		this.description = description;
+		this.startedDate = startedDate;
+		this.endedDate = endedDate;
+		this.pageOrganization = pageOrganization;
 	}
 
 	@Override
 	public String toString() {
-		return "Experience{" +
-				"pageOrganization='" + pageOrganization + '\'' +
-				", startedDate=" + startedDate +
-				", endedDate=" + endedDate +
-				", title='" + title + '\'' +
-				", description='" + description + '\'' +
+		return '\n' + "{" +
+				" Название организации = '" + title + '\'' +
+				", Описание = '" + description + '\'' +
+				", Дата начала = " + startedDate +
+				", Дата окончания = " + endedDate +
+				", Веб сайт = '" + pageOrganization + '\'' +
 				'}';
 	}
 
@@ -35,20 +35,20 @@ public class Experience {
 
 		Experience that = (Experience) o;
 
-		if (!pageOrganization.equals(that.pageOrganization)) return false;
+		if (!title.equals(that.title)) return false;
+		if (!description.equals(that.description)) return false;
 		if (!startedDate.equals(that.startedDate)) return false;
 		if (!endedDate.equals(that.endedDate)) return false;
-		if (!title.equals(that.title)) return false;
-		return description.equals(that.description);
+		return pageOrganization.equals(that.pageOrganization);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = pageOrganization.hashCode();
+		int result = title.hashCode();
+		result = 31 * result + description.hashCode();
 		result = 31 * result + startedDate.hashCode();
 		result = 31 * result + endedDate.hashCode();
-		result = 31 * result + title.hashCode();
-		result = 31 * result + description.hashCode();
+		result = 31 * result + pageOrganization.hashCode();
 		return result;
 	}
 }

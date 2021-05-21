@@ -3,19 +3,15 @@ package com.urise.webapp.model;
 import java.util.List;
 
 public class ExperienceSection extends AbstractSection {
-	private final List <Experience> experience;
+	private final List <Experience> experiences;
 
-	public ExperienceSection(List <Experience> experience) {
-		this.experience = experience;
-	}
-
-	public List <Experience> getExperience() {
-		return experience;
+	public ExperienceSection(List <Experience> experiences) {
+		this.experiences = experiences;
 	}
 
 	@Override
 	public String toString() {
-		return experience.toString();
+		return experiences.toString();
 	}
 
 	@Override
@@ -25,11 +21,11 @@ public class ExperienceSection extends AbstractSection {
 
 		ExperienceSection that = (ExperienceSection) o;
 
-		return experience.equals(that.experience);
+		return experiences.equals(that.experiences);
 	}
 
 	@Override
 	public int hashCode() {
-		return experience.hashCode();
+		return experiences.hashCode();
 	}
 }
