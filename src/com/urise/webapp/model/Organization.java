@@ -2,10 +2,10 @@ package com.urise.webapp.model;
 
 import java.util.List;
 
-public class ExperienceSection extends AbstractSection {
-	private final List <Experience> experiences;
+public class Organization extends AbstractSection {
+	private final List<Experience> experiences;
 
-	public ExperienceSection(List <Experience> experiences) {
+	public Organization(List <Experience> experiences) {
 		this.experiences = experiences;
 	}
 
@@ -19,7 +19,7 @@ public class ExperienceSection extends AbstractSection {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		ExperienceSection that = (ExperienceSection) o;
+		Organization that = (Organization) o;
 
 		return experiences.equals(that.experiences);
 	}
