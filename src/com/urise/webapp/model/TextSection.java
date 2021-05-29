@@ -1,18 +1,16 @@
 package com.urise.webapp.model;
 
+import java.util.Objects;
+
 public class TextSection extends AbstractSection {
 	private final String textContent;
 
 	public TextSection(String textContent) {
+		Objects.requireNonNull(textContent, "textContent must not be null");
 		this.textContent = textContent;
 	}
 
 	public String getTextContent() {
-		return textContent;
-	}
-
-	@Override
-	public String toString() {
 		return textContent;
 	}
 
@@ -30,4 +28,10 @@ public class TextSection extends AbstractSection {
 	public int hashCode() {
 		return textContent.hashCode();
 	}
+
+	@Override
+	public String toString() {
+		return textContent;
+	}
+
 }
