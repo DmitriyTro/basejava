@@ -2,15 +2,13 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
-import com.urise.webapp.model.*;
+import com.urise.webapp.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.urise.webapp.util.DateUtil.of;
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
@@ -31,28 +29,6 @@ public abstract class AbstractStorageTest {
 		RESUME_2 = new Resume(UUID_2, "name2");
 		RESUME_3 = new Resume(UUID_3, "name3");
 		RESUME_4 = new Resume(UUID_4, "name4");
-
-		RESUME_1.addContacts(ContactType.PHONE, "1234");
-		RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("objective_text"));
-		RESUME_1.addSection(SectionType.PERSONAL, new TextSection("personal_text"));
-		RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection("achievement_text1", "achievement_text2",
-				"achievement_text3"));
-		RESUME_1.addSection(SectionType.QUALIFICATIONS, new ListSection("qualification_text1", "qualification_text2",
-				"qualification_text3"));
-		RESUME_1.addSection(SectionType.EXPERIENCE,
-				new Organization(
-						new Experience("Organization_exp", "http://Organization_exp.com",
-								new Experience.Position(of(2021, Month.JUNE), of(2021, Month.JULY),
-										"title_text_exp",
-										"description_text_exp")))
-		);
-		RESUME_1.addSection(SectionType.EDUCATION,
-				new Organization(
-						new Experience("Organization_edu", "http://Organization_edu.com",
-								new Experience.Position(of(2021, Month.AUGUST), of(2021, Month.SEPTEMBER),
-										"title_text_edu",
-										"description_text_edu")))
-		);
 	}
 
 	protected AbstractStorageTest(Storage storage) {
