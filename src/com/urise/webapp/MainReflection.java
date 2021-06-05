@@ -16,7 +16,7 @@ public class MainReflection {
 		field.set(resume, "new_uuid");
 		System.out.println(resume);
 
-		Class <? extends Resume> resumeClass = resume.getClass();
+		Class<? extends Resume> resumeClass = resume.getClass();
 		Method method = resumeClass.getMethod("toString");
 		Object invoke = method.invoke(resume);
 		System.out.println(invoke);

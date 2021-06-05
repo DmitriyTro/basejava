@@ -5,8 +5,8 @@ import com.urise.webapp.model.Resume;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage <Integer> {
-	private final List <Resume> list = new ArrayList <>();
+public class ListStorage extends AbstractStorage<Integer> {
+	private final List<Resume> list = new ArrayList<>();
 
 	@Override
 	protected void doUpdate(Resume resume, Integer searchKey) {
@@ -34,8 +34,8 @@ public class ListStorage extends AbstractStorage <Integer> {
 	}
 
 	@Override
-	public List <Resume> doCopyAll() {
-		return new ArrayList <>(list);
+	public List<Resume> doCopyAll() {
+		return new ArrayList<>(list);
 	}
 
 	@Override

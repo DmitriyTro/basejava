@@ -145,7 +145,7 @@ public class ResumeTestData {
 								null)),
 				new Experience(new Link("Санкт-Петербургский национальный исследовательский университет " +
 						"информационных технологий, механики и оптики", "https://itmo.ru/ru/"),
-						new ArrayList <>((Arrays.asList(
+						new ArrayList<>((Arrays.asList(
 								new Experience.Position(of(1993, Month.SEPTEMBER), of(1996, Month.JULY),
 										"Аспирантура (программист С, С++)",
 										null),
@@ -164,11 +164,11 @@ public class ResumeTestData {
 		System.out.println(resume_1.getUuid());
 		System.out.println(resume_1.getFullName());
 		System.out.println();
-		for (Map.Entry <ContactType, String> entry : resume_1.getContacts().entrySet()) {
+		for (Map.Entry<ContactType, String> entry : resume_1.getContacts().entrySet()) {
 			System.out.println(entry.getKey().getTitle() + ": " + entry.getValue());
 		}
 		System.out.println();
-		for (Map.Entry <SectionType, AbstractSection> entry : resume_1.getSections().entrySet()) {
+		for (Map.Entry<SectionType, AbstractSection> entry : resume_1.getSections().entrySet()) {
 			System.out.println(entry.getKey().getTitle() + ": ");
 			System.out.println(entry.getValue());
 		}

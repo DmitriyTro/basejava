@@ -1,10 +1,14 @@
 package com.urise.webapp.model;
 
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Organization extends AbstractSection {
+	@Serial
+	private static final long serialVersionUID = 1L;
+
 	private final List<Experience> experiences;
 
 	public Organization(Experience... experiences) {
@@ -16,7 +20,7 @@ public class Organization extends AbstractSection {
 		this.experiences = experiences;
 	}
 
-	public List <Experience> getOrganizations() {
+	public List<Experience> getOrganizations() {
 		return experiences;
 	}
 

@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapResumeStorage extends AbstractStorage <Resume> {
-	private final Map <String, Resume> map = new HashMap <>();
+public class MapResumeStorage extends AbstractStorage<Resume> {
+	private final Map<String, Resume> map = new HashMap<>();
 
 	@Override
 	protected void doUpdate(Resume resume, Resume r) {
@@ -46,8 +46,8 @@ public class MapResumeStorage extends AbstractStorage <Resume> {
 	}
 
 	@Override
-	public List <Resume> doCopyAll() {
-		return new ArrayList <>(map.values());
+	public List<Resume> doCopyAll() {
+		return new ArrayList<>(map.values());
 	}
 
 	@Override

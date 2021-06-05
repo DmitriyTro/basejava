@@ -7,12 +7,15 @@ import com.urise.webapp.model.ResumeTestData;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
+	protected static final File STORAGE_DIR = new File("C:\\Users\\Дмитрий\\basejava\\basejava\\storage");
+
 	protected Storage storage;
 
 	private static final String UUID_1 = "uuid1";
@@ -91,7 +94,7 @@ public abstract class AbstractStorageTest {
 
 	@Test
 	public void getAllSorted() {
-		List <Resume> list = storage.getAllSorted();
+		List<Resume> list = storage.getAllSorted();
 		assertEquals(3, list.size());
 		assertEquals(list, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
 	}
