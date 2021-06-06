@@ -27,7 +27,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 		try {
 			doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
 		} catch (IOException e) {
-			throw new StorageException("Write file error.", resume.getUuid(), e);
+			throw new StorageException("File write error.", resume.getUuid(), e);
 		}
 
 	}
@@ -39,7 +39,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 		try {
 			file.createNewFile();
 		} catch (IOException e) {
-			throw new StorageException("Create file error.", file.getName(), e);
+			throw new StorageException("File create error.", file.getName(), e);
 		}
 		doUpdate(resume, file);
 	}
@@ -47,7 +47,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 	@Override
 	protected void doDelete(File file) {
 		if (!file.delete()) {
-			throw new StorageException("Delete file error.", file.getName());
+			throw new StorageException("File delete error.", file.getName());
 		}
 	}
 
@@ -56,7 +56,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 		try {
 			return doRead(new BufferedInputStream(new FileInputStream(file)));
 		} catch (IOException e) {
-			throw new StorageException("Read file error.", file.getName(), e);
+			throw new StorageException("File read error.", file.getName(), e);
 		}
 	}
 
@@ -76,7 +76,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 	protected List<Resume> doCopyAll() {
 		File[] files = directory.listFiles();
 		if (files == null) {
-			throw new StorageException("Read directory error.", null);
+			throw new StorageException("Directory read error.");
 		}
 		List<Resume> list = new ArrayList<>(files.length);
 		for (File file : files) {
@@ -99,7 +99,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 	public int size() {
 		String[] list = directory.list();
 		if (list == null) {
-			throw new StorageException("Size directory error.", null);
+			throw new StorageException("Directory read error.");
 		}
 		return list.length;
 	}
