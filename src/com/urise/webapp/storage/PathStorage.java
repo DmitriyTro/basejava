@@ -2,8 +2,11 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
+import com.urise.webapp.storage.serializer.StreamSerializer;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,11 +15,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public abstract class AbstractPathStorage extends AbstractStorage<Path> {
+public class PathStorage extends AbstractStorage<Path> {
 	private final Path directory;
+	private final StreamSerializer streamSerializer;
 
-	protected AbstractPathStorage(String dir) {
+	protected PathStorage(String dir, StreamSerializer streamSerializer) {
 		Objects.requireNonNull(dir, " directory must be not null.");
+
+		this.streamSerializer = streamSerializer;
 		directory = Paths.get(dir);
 		if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
 			throw new IllegalArgumentException(dir + " is not directory or is not writable.");
@@ -26,13 +32,11 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 	@Override
 	protected void doUpdate(Resume resume, Path path) {
 		try {
-			doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
+			streamSerializer.doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
 		} catch (IOException e) {
 			throw new StorageException("Path write error.", resume.getUuid(), e);
 		}
 	}
-
-	protected abstract void doWrite(Resume resume, OutputStream os) throws IOException;
 
 	@Override
 	protected void doSave(Resume resume, Path path) {
@@ -56,13 +60,11 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 	@Override
 	protected Resume doGet(Path path) {
 		try {
-			return doRead(new BufferedInputStream(Files.newInputStream(path)));
+			return streamSerializer.doRead(new BufferedInputStream(Files.newInputStream(path)));
 		} catch (IOException e) {
 			throw new StorageException("Path read error.", getFileName(path), e);
 		}
 	}
-
-	protected abstract Resume doRead(InputStream is) throws IOException;
 
 	@Override
 	protected boolean isExist(Path path) {

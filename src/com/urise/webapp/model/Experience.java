@@ -1,5 +1,10 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,12 +16,16 @@ import java.util.Objects;
 import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Experience implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	private final Link pageOrganization;
+	private Link pageOrganization;
 	private List<Position> positions;
+
+	public Experience() {
+	}
 
 	public Experience(String name, String url, Position... positions) {
 		this(new Link(name, url), Arrays.asList(positions));
@@ -25,6 +34,14 @@ public class Experience implements Serializable {
 	public Experience(Link pageOrganization, List<Position> positions) {
 		this.pageOrganization = pageOrganization;
 		this.positions = positions;
+	}
+
+	public Link getPageOrganization() {
+		return pageOrganization;
+	}
+
+	public List<Position> getPositions() {
+		return positions;
 	}
 
 	@Override
@@ -49,11 +66,17 @@ public class Experience implements Serializable {
 				"";
 	}
 
+	@XmlAccessorType(XmlAccessType.FIELD)
 	public static class Position implements Serializable {
-		private final LocalDate startedDate;
-		private final LocalDate endedDate;
-		private final String title;
-		private final String description;
+		@XmlJavaTypeAdapter(LocalDateAdapter.class)
+		private LocalDate startedDate;
+		@XmlJavaTypeAdapter(LocalDateAdapter.class)
+		private LocalDate endedDate;
+		private String title;
+		private String description;
+
+		public Position() {
+		}
 
 		public Position(int startYear, Month startMonth, String title, String description) {
 			this(of(startYear, startMonth), NOW, title, description);
@@ -70,7 +93,7 @@ public class Experience implements Serializable {
 			this.startedDate = startedDate;
 			this.endedDate = endedDate;
 			this.title = title;
-			this.description = description;
+			this.description = description == null ? "" : description;
 		}
 
 		public LocalDate getStartedDate() {

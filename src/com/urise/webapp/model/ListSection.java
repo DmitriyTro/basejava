@@ -9,24 +9,27 @@ public class ListSection extends AbstractSection {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	private final List<String> list;
+	private List<String> items;
 
-	public ListSection(String... list) {
-		this(Arrays.asList(list));
+	public ListSection() {
 	}
 
-	public ListSection(List<String> list) {
-		Objects.requireNonNull(list, "list must not be null");
-		this.list = list;
+	public ListSection(String... items) {
+		this(Arrays.asList(items));
 	}
 
-	public List<String> getList() {
-		return list;
+	public ListSection(List<String> items) {
+		Objects.requireNonNull(items, "items must not be null");
+		this.items = items;
+	}
+
+	public List<String> getItems() {
+		return items;
 	}
 
 	@Override
 	public String toString() {
-		return list.toString();
+		return items.toString();
 	}
 
 	@Override
@@ -36,11 +39,11 @@ public class ListSection extends AbstractSection {
 
 		ListSection that = (ListSection) o;
 
-		return list.equals(that.list);
+		return items.equals(that.items);
 	}
 
 	@Override
 	public int hashCode() {
-		return list.hashCode();
+		return items.hashCode();
 	}
 }
