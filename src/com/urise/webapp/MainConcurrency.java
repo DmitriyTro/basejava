@@ -1,7 +1,9 @@
 package com.urise.webapp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class MainConcurrency {
 	public static final int THREADS_NUMBERS = 10000;
@@ -21,24 +23,20 @@ public class MainConcurrency {
 		System.out.println(thread0.getState());
 
 		final MainConcurrency mainConcurrency = new MainConcurrency();
-		List<Thread> threads = new ArrayList<>(THREADS_NUMBERS);
+		CountDownLatch latch = new CountDownLatch(THREADS_NUMBERS);
+		ExecutorService executorService = Executors.newCachedThreadPool();
+
 		for (int i = 0; i < THREADS_NUMBERS; i++) {
-			Thread thread = new Thread(() -> {
+			executorService.submit(() -> {
 				for (int j = 0; j < 100; j++) {
 					mainConcurrency.inc();
 				}
+				latch.countDown();
 			});
-			thread.start();
-			threads.add(thread);
 		}
 
-		threads.forEach(t -> {
-			try {
-				t.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		});
+		latch.await(10, TimeUnit.SECONDS);
+		executorService.shutdown();
 		System.out.println(counter);
 
 		final String lock1 = "lock1";
